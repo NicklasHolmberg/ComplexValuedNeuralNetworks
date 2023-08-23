@@ -39,7 +39,7 @@ def _calculate_fan_dimensions(shape):
 class _StochasticDistributionsFactory:
     """
     Random generator that selects appropriate random ops.
-    Reference: TensorFlow implementation (URL in the original comment).
+    Reference: TensorFlow implementation.
     """
 
     def __init__(self, seed=None):

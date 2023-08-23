@@ -1,6 +1,7 @@
 import numpy as np
-from complex_valued_neural_networks.activation_functions import complex_cardioid, complex_leaky_relu, complex_tanh, zrelu, modrelu
 import tensorflow as tf
+
+from complex_valued_neural_networks.activation_functions import complex_cardioid, complex_leaky_relu, complex_tanh, zrelu, modrelu
 from complex_valued_neural_networks.complex_layers.complex_layers import ComplexDense, ComplexFlatten
 import constants
 
@@ -15,7 +16,7 @@ def create_model(activation_function):
         model = tf.keras.models.Sequential([
             ComplexFlatten(input_shape=(28, 28, 1), dtype=np.complex64),
             ComplexDense(128, activation=activation_function, dtype=np.complex64),
-            ComplexDense(10, activation=cast_to_real, dtype=np.complex64),
+            ComplexDense(constants.NUM_CLASSES, activation=cast_to_real, dtype=np.complex64),
             tf.keras.layers.Activation('softmax')
         ])
     else:

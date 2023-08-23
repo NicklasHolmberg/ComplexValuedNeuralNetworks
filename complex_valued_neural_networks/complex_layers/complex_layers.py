@@ -4,8 +4,8 @@ import tensorflow as tf
 from tensorflow.keras.layers import Flatten, Dense
 from tensorflow.keras import initializers
 from tensorflow import TensorShape, Tensor
-
 from typing import Union, List
+
 from complex_valued_neural_networks.activation_functions import t_activation
 from complex_valued_neural_networks.complex_initializers import ComplexXavierInitializer, Zeros, ComplexWeightInitializer, INIT_TECHNIQUES
 

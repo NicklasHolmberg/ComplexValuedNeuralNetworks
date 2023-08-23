@@ -1,14 +1,18 @@
-from complex_valued_neural_networks.activation_functions import complex_cardioid, complex_leaky_relu, modrelu
 import numpy as np
 from sklearn.metrics import cohen_kappa_score, matthews_corrcoef, roc_auc_score
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
+from complex_valued_neural_networks.activation_functions import complex_cardioid, complex_leaky_relu, modrelu
 
-from models.model_definition import create_model
 import constants
+from common import plot
+from common.utils import MetricsHistory
+from models.model_definition import create_model
+
 
 def main():
     results = {}
+    model_predictions = {}
 
     # Load MNIST dataset containing grayscale images of handwritten digits
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
@@ -25,6 +29,8 @@ def main():
     y_train = to_categorical(y_train, num_classes=constants.NUM_CLASSES)
     y_test = to_categorical(y_test, num_classes=constants.NUM_CLASSES)
 
+    y_test_labels = np.argmax(y_test, axis=1)  # Convert one-hot encoded true labels to integers
+
     # A dictionary containing various activation functions to be evaluated
     activation_functions = {
         'ReLU': 'relu',
@@ -33,41 +39,65 @@ def main():
         'Complex Cardioid': complex_cardioid,
     }
 
+    metrics_histories = {
+        'Training Loss': {},
+        'Validation Accuracy': {},
+        'Matthews Correlation Coefficient': {},
+        'Cohen’s Kappa Score': {},
+        'ROC AUC Score': {}
+    }
+
     # Iterate through activation functions, training a separate model for each
     for model_name, activation_function in activation_functions.items():
-        # Create and train the model using the specified activation function
+        print(f'Training model with {model_name} activation function.')
+        # Initialize the validation data and the custom MetricsHistory callback
+        validation_data = (X_test, y_test)
+        test_data = (X_test, y_test)  # In this case, test data is same as validation data
+        metrics_history = MetricsHistory(validation_data=validation_data, test_data=test_data)        
+        # Train the model with the custom callback
         model = create_model(activation_function)
-        model.fit(X_train, y_train, epochs=10, validation_data=(X_test, y_test))
+        history = model.fit(
+            X_train, y_train, epochs=constants.NUM_EPOCHS,
+            validation_data=validation_data,
+            callbacks=[metrics_history]
+        )
+        
+        # Store metrics history for plotting later
+        metrics_histories['Training Loss'][model_name] = history.history['loss']
+        metrics_histories['Validation Accuracy'][model_name] = history.history['val_accuracy']
+        metrics_histories['Matthews Correlation Coefficient'][model_name] = metrics_history.mccs
+        metrics_histories['Cohen’s Kappa Score'][model_name] = metrics_history.kappas
+        metrics_histories['ROC AUC Score'][model_name] = metrics_history.auc_scores
 
-        # Evaluate the model on the test data
-        loss, accuracy = model.evaluate(X_test, y_test)
-
-        # Predict class probabilities for additional metrics
+        # Store predictions for later use
         y_pred = model.predict(X_test)
-        y_pred_labels = np.argmax(y_pred, axis=1)
-        y_test_labels = np.argmax(y_test, axis=1)
+        model_predictions[model_name] = np.argmax(y_pred, axis=1)
 
-        # Compute various performance metrics
+        loss, accuracy = model.evaluate(X_test, y_test)
+        y_pred_labels = np.argmax(y_pred, axis=1)
+
         mcc = matthews_corrcoef(y_test_labels, y_pred_labels)
         kappa = cohen_kappa_score(y_test_labels, y_pred_labels)
         auc_score = roc_auc_score(y_test, y_pred)
 
-        # Store results
         results[model_name] = {
-            'Test loss': loss,                      # Model's loss on the test data
-            'Test accuracy': accuracy,              # Fraction of correctly classified samples
-            'ROC AUC Score': auc_score,             # Receiver Operating Characteristic Area Under Curve
-            'Matthews Correlation Coefficient': mcc,# Measure of quality for binary classification
-            'Cohen\'s Kappa': kappa,                # Measure of classification accuracy normalized by chance
+            'Test Loss': loss,
+            'Test accuracy': accuracy,
+            'ROC AUC Score': auc_score,
+            'Matthews Correlation Coefficient': mcc,
+            'Cohen\'s Kappa': kappa,
         }
 
-    # Print results
+    for model_name, y_pred_labels in model_predictions.items():
+        plot.plot_confusion_matrix(y_test_labels, y_pred_labels, model_name)
+
+    plot.plot_metrics_comparison(metrics_histories)
+
+    # Print final results after all models are trained and plotted
     for model_name, result in results.items():
-        print(f'{model_name}:')
+        print(f'\nFinal results for {model_name}:')
         for metric_name, metric_value in result.items():
             print(f'  {metric_name}: {metric_value}')
-        print()
 
 if __name__ == "__main__":
     main()
-
