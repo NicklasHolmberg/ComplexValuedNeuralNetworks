@@ -1,8 +1,10 @@
 import numpy as np
-from activation_functions import complex_cardioid, complex_leaky_relu, complex_tanh, zrelu, modrelu
+from complex_valued_neural_networks.activation_functions import complex_cardioid, complex_leaky_relu, complex_tanh, zrelu, modrelu
 import tensorflow as tf
-from cvnn.layers import ComplexDense, ComplexFlatten
+from complex_valued_neural_networks.complex_layers.complex_layers import ComplexDense, ComplexFlatten
 import constants
+
+tf.get_logger().setLevel('ERROR')
 
 def cast_to_real(x):
     return tf.cast(x, tf.float32)

@@ -1,10 +1,10 @@
-from activation_functions import complex_cardioid, complex_leaky_relu, modrelu
+from complex_valued_neural_networks.activation_functions import complex_cardioid, complex_leaky_relu, modrelu
 import numpy as np
 from sklearn.metrics import cohen_kappa_score, matthews_corrcoef, roc_auc_score
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
 
-from model_definition import create_model
+from models.model_definition import create_model
 import constants
 
 def main():
