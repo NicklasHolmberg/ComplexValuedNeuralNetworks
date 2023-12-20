@@ -60,3 +60,6 @@ These metrics collectively provide a holistic view of the models' performance ac
 
 ## Additional Notes
 * Modularity and Extensibility: The code is structured to allow easy modification and extension. Developers can integrate new complex-valued layers, activation functions and datasets with minimal changes.
+
+## More Info About me, Nicklas Holmberg
+Please refer to my personal page here for more information about me and my areas of interests: [Personal Page](https://github.com/NicklasHolmberg/Personal_Page)
