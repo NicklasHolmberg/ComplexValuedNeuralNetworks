@@ -29,14 +29,37 @@ These metrics collectively provide a holistic view of the models' performance ac
 - scikit-learn: Used for additional data processing and evaluation metrics.
 
 ## How to Run
-- Clone the Repository: Download the code to your local machine.
-- Install Dependencies: Ensure that Python 3.x, TensorFlow, NumPy, and scikit-learn are installed.
-- Run the Main Script:
 
-   ```bash
-   python main.py
-   ```
+1. **Clone this repository.**
+   - Use `git clone https://github.com/NicklasHolmberg/ComplexValuedNeuralNetworks` to clone the repository to your local machine.
 
+2. **Set up a Python virtual environment.**
+   - Navigate to the cloned repository's directory.
+   - Create a virtual environment: 
+     ```bash
+     python -m venv venv
+     ```
+   - Activate the virtual environment:
+     - On Windows:
+       ```bash
+       venv\Scripts\activate
+       ```
+     - On Unix or MacOS:
+       ```bash
+       source venv/bin/activate
+       ```
+
+3. **Install dependencies.**
+   - With the virtual environment activated, install the required dependencies:
+     ```bash
+     pip install -r requirements.txt
+     ```
+
+4. **Run the main script.**
+   - Execute the main Python script:
+     ```bash
+     python main.py
+     ```
 
 ## Additional Notes
 * TensorFlow and Keras Integration: The custom complex-valued layers and activation functions are seamlessly integrated into TensorFlow's computational graph, ensuring efficient computation and gradient propagation.

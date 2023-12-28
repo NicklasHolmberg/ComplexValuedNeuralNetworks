@@ -121,7 +121,7 @@ class ComplexXavierInitializer(ComplexWeightInitializer):
 
     Usage:
     - Standalone: `initializer = ComplexXavierInitializer(); values = initializer(shape=(2, 2))`
-    - In a cvnn layer: `layer = cvnn.layers.ComplexDense(units=10, kernel_initializer=ComplexXavierInitializer())`
+    - In a cvnn layer: `layer = layers.ComplexDense(units=10, kernel_initializer=ComplexXavierInitializer())`
 
     Args:
         seed (Optional[int]): Seed for random number generation.
@@ -138,7 +138,7 @@ class Zeros:
     Creates a tensor with all elements set to zero.
 
     ```
-    > >> cvnn.initializers.Zeros()(shape=(2,2))
+    > >> initializers.Zeros()(shape=(2,2))
     <tf.Tensor: shape=(2, 2), dtype=float32, numpy=
     array([[0.+0.j, 0.+0.j],
           [0.+0.j, 0.+0.j]], dtype=float32)>
@@ -146,9 +146,7 @@ class Zeros:
 
     ```
     # Usage in a cvnn layer:
-    import cvnn
-    initializer = cvnn.initializers.Zeros()
-    layer = cvnn.layers.ComplexDense(units=10, bias_initializer=initializer)
+    layer = layers.ComplexDense(units=10, bias_initializer=initializer)
     ```
     """
     def __call__(self, shape, dtype=tf.dtypes.complex64):
