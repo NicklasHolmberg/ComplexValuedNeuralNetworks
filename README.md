@@ -4,7 +4,7 @@
 This repository presents an experimental framework for evaluating various complex-valued activation functions in Complex-Valued Neural Networks (CVNNs). Focusing on the MNIST dataset, it explores the performance of activation functions like ModReLU, Complex Leaky ReLU, Complex tanh, Complex Cardioid, and zReLU within CVNNs. The aim is to understand how these functions affect the learning dynamics and performance of networks processing complex-valued data.
 
 ## Documentation
-For a detailed background and a mathematical exploration of the principles behind these activation functions when used in a CVNN context, please refer to my exploratory paper published here in this repo: ```Navigating_the_Complex_Plane.pdf 
+For a detailed background and a mathematical exploration of the principles behind these activation functions when used in a CVNN context, please refer to my exploratory paper published here in this repo: [Navigating_the_Complex_Plane.pdf](https://github.com/NicklasHolmberg/ComplexValuedNeuralNetworks/blob/main/Navigating_the_Complex_Plane.pdf)
 
 ## Experiment Design
 The experiment employs the MNIST dataset, where images are transformed into the frequency domain via Fourier Transforms. This transformation is cr
