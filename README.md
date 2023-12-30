@@ -25,13 +25,6 @@ We evaluate model performance using a variety of metrics:
 
 These metrics collectively provide a holistic view of the models' performance across different dimensions.
 
-## Requirements
-- Python 3.x: The primary programming language used.
-- TensorFlow: The core framework for building and training neural network models.
-- Keras: Integrated within TensorFlow, used for its high-level neural networks API which simplifies model construction and experimentation.
-- NumPy: Essential for numerical computations, particularly for data preprocessing.
-- scikit-learn: Used for additional data processing and evaluation metrics.
-
 ## How to Run
 
 1. **Clone this repository.**
