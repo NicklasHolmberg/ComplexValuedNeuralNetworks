@@ -1,7 +1,7 @@
 # Complex-Valued Neural Networks (CVNNs): Exploring Activation Functions
 
 ## Overview
-This repository presents an experimental framework for evaluating various complex-valued activation functions when used in a Complex-Valued Neural Network (CVNN). It extends TensorFlow support for complex-valued data and includes specialized TensorFlow layers tailored for handling complex numbers. Primarily focusing on the MNIST dataset, the framework explores the performance of complex-valued activation functions like ModReLU, Complex Leaky ReLU, Complex tanh, Complex Cardioid, and zReLU. The aim is to understand how these functions affect the learning dynamics and performance of networks processing complex-valued data.
+This repository presents an experimental framework for evaluating various complex-valued activation functions when used in a Complex-Valued Neural Network (CVNN). It extends TensorFlow support for complex-valued data and includes specialized TensorFlow layers tailored for handling complex numbers. Primarily focusing on the MNIST dataset, the framework explores the performance of complex-valued activation functions like ModReLU, Complex Leaky ReLU, Complex tanh, Complex Cardioid, and zReLU. The aim is to understand how these functions influence the learning dynamics and performance of networks processing complex-valued data.
 
 ## Documentation
 For a detailed background and a mathematical exploration of the principles behind these activation functions when used in a CVNN context, please refer to my exploratory paper published here in this repo: [Navigating_the_Complex_Plane.pdf](https://github.com/NicklasHolmberg/ComplexValuedNeuralNetworks/blob/main/Navigating_the_Complex_Plane.pdf)
